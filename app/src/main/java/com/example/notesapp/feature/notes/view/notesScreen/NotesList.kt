@@ -2,7 +2,6 @@ package com.example.notesapp.feature.notes.view.notesScreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -26,7 +25,11 @@ import com.example.notesapp.ui.theme.spacing8
 @Composable
 fun NotesList(
     notesList: List<NoteInfo>,
-    onNoteClicked: () -> Unit
+    onNoteClicked: () -> Unit,
+    onLongPressImage: (Int) -> Unit,
+    onReleaseLongPress: () -> Unit,
+    onLongPressNote: (String) -> Unit,
+    onReleaseLongPressNote: () -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -36,17 +39,25 @@ fun NotesList(
             Column(modifier = Modifier.fillMaxSize()) {
                 val noteCardViewId = notesList[it]
                 when (noteCardViewId.cardViewSelectedId) {
-                    1 -> NotesListItemOne(noteInfo = notesList[it], onClick = onNoteClicked)
-                    2 -> NotesListItemTwo(noteInfo = notesList[it])
+                    1 -> NotesListItemOne(noteInfo = notesList[it], onClick = onNoteClicked, onLongPressNote, onReleaseLongPressNote)
+                    2 -> NotesListItemTwo(noteInfo = notesList[it], onLongPressNote, onReleaseLongPressNote)
                     3 -> {
-                        if (notesList[it].note.isNotEmpty()) NotesListItemOne(noteInfo = notesList[it], onClick = onNoteClicked)
+                        // TODO - Will be fixed cleaned and refactored in future iterations
+                        if (notesList[it].note.isNotEmpty()) NotesListItemOne(noteInfo = notesList[it], onClick = onNoteClicked, onLongPressNote, onReleaseLongPressNote)
                         else NotesListItemThree(noteInfo = notesList[it], onClick = onNoteClicked)
                     }
                     4 -> {
                         if (notesList[it].noteImages?.isNotEmpty() == true) {
-                            NotesListItemSideBySide(noteInfo = notesList[it], onClick = onNoteClicked)
+                            NotesListItemSideBySide(
+                                noteInfo = notesList[it],
+                                onClick = onNoteClicked,
+                                onLongPressImage,
+                                onReleaseLongPress,
+                                onLongPressNote,
+                                onReleaseLongPressNote
+                            )
                         } else {
-                            NotesListItemOne(noteInfo = notesList[it], onClick = onNoteClicked)
+                            NotesListItemOne(noteInfo = notesList[it], onClick = onNoteClicked, onLongPressNote, onReleaseLongPressNote)
                         }
                     }
                 }
@@ -59,6 +70,13 @@ fun NotesList(
 @Composable
 fun NotesListPreview() {
     NotesAppTheme {
-        NotesList(notesList = mockNotesList(), onNoteClicked = {})
+        NotesList(
+            notesList = mockNotesList(),
+            onNoteClicked = {},
+            onLongPressImage = {},
+            onReleaseLongPress = {},
+            onLongPressNote = {},
+            onReleaseLongPressNote = {}
+        )
     }
 }

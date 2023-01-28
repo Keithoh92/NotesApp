@@ -1,5 +1,6 @@
 package com.example.notesapp.feature.notes.view
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,9 +14,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.notesapp.R
+import com.example.notesapp.feature.notes.data.NotesListingItemState
 import com.example.notesapp.feature.notes.data.mockNotesList
 import com.example.notesapp.feature.notes.view.notesScreen.NotesList
 import com.example.notesapp.feature.notes.view.notesScreen.NotesScreenBottomAppBar
+import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.NoteItemPreviewer
 import com.example.notesapp.ui.theme.NotesAppTheme
 
 @Composable
@@ -23,7 +26,12 @@ fun NotesScreen(
     onClickSearch: () -> Unit,
     onClickShare: () -> Unit,
     onClickNotifications: () -> Unit,
-    openDrawer: () -> Unit
+    openDrawer: () -> Unit,
+    notesListingItemState: NotesListingItemState,
+    onLongPressImage: (Int) -> Unit,
+    onReleaseLongPressImage: () -> Unit,
+    onLongPressNote: (String) -> Unit,
+    onReleaseLongPressNote: () -> Unit
 ) {
     
     NotesAppTheme {
@@ -40,7 +48,21 @@ fun NotesScreen(
                             top = it.calculateTopPadding()
                         )
                 ) {
-                    NotesList(notesList = mockNotesList(), onNoteClicked = {})
+                    NotesList(
+                        notesList = mockNotesList(),
+                        onNoteClicked = {},
+                        onLongPressImage,
+                        onReleaseLongPressImage,
+                        onLongPressNote,
+                        onReleaseLongPressNote
+                    )
+
+                    AnimatedVisibility(visible = notesListingItemState.showNoteItemPreview) {
+                        NoteItemPreviewer(
+                            image = notesListingItemState.imageToShow,
+                            note = notesListingItemState.noteToShow
+                        )
+                    }
                 }            
             },
             bottomBar = {
@@ -74,7 +96,12 @@ fun NotesScreenPreview() {
             onClickSearch = {},
             onClickShare = {},
             onClickNotifications = {},
-            openDrawer = {}
+            openDrawer = {},
+            notesListingItemState = NotesListingItemState(),
+            onLongPressImage = {},
+            onReleaseLongPressImage = {},
+            onLongPressNote = {},
+            onReleaseLongPressNote = {}
         )
     }
 }

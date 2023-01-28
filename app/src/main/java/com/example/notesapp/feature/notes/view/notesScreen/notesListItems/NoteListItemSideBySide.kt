@@ -20,7 +20,11 @@ import com.example.notesapp.ui.theme.spacing8
 @Composable
 fun NotesListItemSideBySide(
     noteInfo: NoteInfo,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onLongPressImage: (Int) -> Unit,
+    onReleaseLongPress: () -> Unit,
+    onLongPressNote: (String) -> Unit,
+    onReleaseLongPressNote: () -> Unit
 ) {
 
     NotesListItemCardView(onClick = onClick) {
@@ -37,7 +41,11 @@ fun NotesListItemSideBySide(
             ) {
                 NoteItemTitleTextView(title = noteInfo.title)
 
-                NoteItemNoteTextView(note = noteInfo.note)
+                NoteItemNoteTextView(
+                    note = noteInfo.note,
+                    onLongPressNote,
+                    onReleaseLongPressNote
+                )
             }
 
             Column(
@@ -47,6 +55,8 @@ fun NotesListItemSideBySide(
             ) {
                 GridViewGalleryTwoByTwo(
                     images = noteInfo.noteImages ?: emptyList(),
+                    onLongPressImage,
+                    onReleaseLongPress
                 )
             }
         }
@@ -59,7 +69,11 @@ fun NotesListItemSideBySidePreview() {
     NotesAppTheme {
         NotesListItemSideBySide(
             noteInfo = mockNoteInfo()[3],
-            onClick = {}
+            onClick = {},
+            {},
+            {},
+            {},
+            {}
         )
     }
 }
