@@ -5,35 +5,34 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-
-private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
-)
-
-private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
-)
+import androidx.compose.ui.res.colorResource
+import com.example.notesapp.R
 
 @Composable
 fun NotesAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+
+    val darkColorPalette = darkColors(
+        primary = colorResource(id = R.color.dark_grey_app),
+        primaryVariant = colorResource(id = R.color.dark_grey_app),
+        secondary = colorResource(id = R.color.light_grey_app)
+    )
+
+    val lightColorPalette = lightColors(
+        primary = colorResource(id = R.color.dark_grey_app),
+        primaryVariant = colorResource(id = R.color.dark_grey_app),
+        secondary = colorResource(id = R.color.light_grey_app)
+
+        /* Other default colors to override
+        background = Color.White,
+        surface = Color.White,
+        onPrimary = Color.White,
+        onSecondary = Color.Black,
+        onBackground = Color.Black,
+        onSurface = Color.Black,
+        */
+    )
+
+    val colors = if (darkTheme) { darkColorPalette } else { lightColorPalette }
 
     MaterialTheme(
         colors = colors,

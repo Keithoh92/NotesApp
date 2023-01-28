@@ -1,4 +1,4 @@
-package com.example.notesapp.feature.homescreen.view
+package com.example.notesapp.feature.notes.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -10,26 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import com.example.notesapp.feature.homescreen.data.NoteInfo
-import com.example.notesapp.ui.theme.full
-import com.example.notesapp.ui.theme.spacing10
-import com.example.notesapp.ui.theme.spacing2
-import com.example.notesapp.ui.theme.spacing4
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.notesapp.feature.notes.data.NoteInfo
+import com.example.notesapp.feature.notes.data.mockNoteInfo
+import com.example.notesapp.ui.theme.*
 
 // The row view for each note will be controlled by the settings that the user chooses
 
 @Composable
-fun NoteListItem(
-    noteListing: NoteInfo,
-    modifier: Modifier
-) {
-    Row() {
-
-    }
-}
-
-@Composable
-fun notesListingItem1(noteListing: NoteInfo) {
+fun NoteListItem(noteListing: NoteInfo) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -58,5 +47,13 @@ fun notesListingItem1(noteListing: NoteInfo) {
                 )
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun NotesListItemPreview() {
+    NotesAppTheme {
+        NoteListItem(noteListing = mockNoteInfo().first())
     }
 }

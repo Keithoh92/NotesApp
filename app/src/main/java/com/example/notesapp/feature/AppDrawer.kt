@@ -27,11 +27,10 @@ private val screens = listOf(
 
 @Composable
 fun Drawer(
-    modifier: Modifier = Modifier,
     onDestinationClicked: (route: String) -> Unit
 ) {
     Column(
-        modifier
+        modifier = Modifier
             .fillMaxSize()
             .padding(start = spacing24, top = spacing48)
     ) {
@@ -54,8 +53,10 @@ fun Drawer(
     }
 }
 
-//@Preview
-//@Composable
-//fun DrawerPreview() {
-//    Drawer()
-//}
+@Preview
+@Composable
+fun DrawerPreview() {
+    Drawer(
+        onDestinationClicked = {}
+    )
+}

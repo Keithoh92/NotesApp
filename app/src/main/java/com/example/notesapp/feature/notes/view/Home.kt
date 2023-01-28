@@ -1,4 +1,4 @@
-package com.example.notesapp.feature.homescreen.view
+package com.example.notesapp.feature.notes.view
 
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -12,16 +12,17 @@ import com.example.notesapp.feature.DrawerScreens
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreenMain() {
+fun HomeScreenMain(
+    onClickSearch: () -> Unit,
+    onClickShare: () -> Unit,
+    onClickNotifications: () -> Unit,
+) {
     val navController = rememberNavController()
-    
-    Surface(color = MaterialTheme.colors.background) {
-        val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-        val scope = rememberCoroutineScope()
-        val openDrawer = {
-            scope.launch { drawerState.open() }
-        }
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+    val openDrawer = { scope.launch { drawerState.open() } }
 
+//    NotesAppTheme {
         ModalDrawer(
             drawerState = drawerState,
             gesturesEnabled = drawerState.isOpen,
@@ -37,14 +38,17 @@ fun HomeScreenMain() {
                         }
                     }
                 )
-            }
+            },
         ) {
             NavHost(
                 navController = navController,
                 startDestination = DrawerScreens.Home.route
             ) {
                 composable(DrawerScreens.Home.route) {
-                    Help(
+                    NotesScreen(
+                        onClickSearch = onClickSearch,
+                        onClickShare = onClickShare,
+                        onClickNotifications = onClickNotifications,
                         openDrawer = {
                             openDrawer()
                         }
@@ -52,11 +56,15 @@ fun HomeScreenMain() {
                 }
             }
         }
-    }
+//    }
 }
 
 @Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreenMain()
+    HomeScreenMain(
+        onClickSearch = {},
+        onClickShare = {},
+        onClickNotifications = {}
+    )
 }
