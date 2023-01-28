@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.notesapp.feature.notes.data.NoteInfo
 import com.example.notesapp.feature.notes.data.mockNoteInfo
-import com.example.notesapp.feature.notes.view.general.NoteItemNoteTextView
+import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.NoteItemNoteTextView
 import com.example.notesapp.feature.notes.view.general.NoteItemTitleTextView
 import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.NotesListItemCardView
 import com.example.notesapp.ui.theme.NotesAppTheme
@@ -20,7 +20,9 @@ import com.example.notesapp.ui.theme.spacing8
 @Composable
 fun NotesListItemOne(
     noteInfo: NoteInfo,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onLongPressNote: (String) -> Unit,
+    onReleaseLongPressNote: () -> Unit
 ) {
     
     NotesListItemCardView(onClick = onClick) {
@@ -53,7 +55,11 @@ fun NotesListItemOne(
                 modifier = Modifier
                     .padding(spacing8)
             ) {
-                NoteItemNoteTextView(note = noteInfo.note)
+                NoteItemNoteTextView(
+                    note = noteInfo.note,
+                    onLongPressNote,
+                    onReleaseLongPressNote
+                )
             }
         }
     }
@@ -65,7 +71,9 @@ fun NotesListItemOnePreview() {
     NotesAppTheme {
         NotesListItemOne(
             noteInfo = mockNoteInfo().first(),
-            onClick = {}
+            onClick = {},
+            {},
+            {}
         )
     }
 }

@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.notesapp.feature.notes.data.NotesListingItemState
 import com.example.notesapp.feature.notes.view.HomeScreenMain
 import com.example.notesapp.feature.notes.viewmodel.NotesScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +22,12 @@ class MainActivity : ComponentActivity() {
             HomeScreenMain(
                 onClickSearch = notesScreenViewModel::onClickSearch,
                 onClickShare = notesScreenViewModel::onClickShare,
-                onClickNotifications = notesScreenViewModel::onClickNotifications
+                onClickNotifications = notesScreenViewModel::onClickNotifications,
+                notesListingItemState = notesScreenViewModel.notesListingItemState,
+                onLongPressImage = notesScreenViewModel::onClickImagePreview,
+                onReleaseLongPressImage = notesScreenViewModel::onDismissImagePreview,
+                onLongPressNote = notesScreenViewModel::onClickNotePreview,
+                onReleaseLongPressNote = notesScreenViewModel::onDismissNotePreview
             )
         }
     }
@@ -33,6 +39,11 @@ fun MainActivityPreview() {
     HomeScreenMain(
         onClickSearch = {},
         onClickShare = {},
-        onClickNotifications = {}
+        onClickNotifications = {},
+        notesListingItemState = NotesListingItemState(),
+        onLongPressImage = {},
+        onReleaseLongPressImage = {},
+        onLongPressNote = {},
+        onReleaseLongPressNote = {}
     )
 }

@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.notesapp.feature.Drawer
 import com.example.notesapp.feature.DrawerScreens
+import com.example.notesapp.feature.notes.data.NotesListingItemState
 import kotlinx.coroutines.launch
 
 @Composable
@@ -16,6 +17,11 @@ fun HomeScreenMain(
     onClickSearch: () -> Unit,
     onClickShare: () -> Unit,
     onClickNotifications: () -> Unit,
+    notesListingItemState: NotesListingItemState,
+    onLongPressImage: (Int) -> Unit,
+    onReleaseLongPressImage: () -> Unit,
+    onLongPressNote: (String) -> Unit,
+    onReleaseLongPressNote: () -> Unit
 ) {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -23,40 +29,44 @@ fun HomeScreenMain(
     val openDrawer = { scope.launch { drawerState.open() } }
 
 //    NotesAppTheme {
-        ModalDrawer(
-            drawerState = drawerState,
-            gesturesEnabled = drawerState.isOpen,
-            drawerContent = {
-                Drawer(
-                    onDestinationClicked = { route ->
-                        scope.launch {
-                            drawerState.close()
-                        }
-                        navController.navigate(route) {
-                            popUpTo = navController.graph.startDestinationId
-                            launchSingleTop = true
-                        }
+    ModalDrawer(
+        drawerState = drawerState,
+        gesturesEnabled = drawerState.isOpen,
+        drawerContent = {
+            Drawer(
+                onDestinationClicked = { route ->
+                    scope.launch {
+                        drawerState.close()
                     }
-                )
-            },
-        ) {
-            NavHost(
-                navController = navController,
-                startDestination = DrawerScreens.Home.route
-            ) {
-                composable(DrawerScreens.Home.route) {
-                    NotesScreen(
-                        onClickSearch = onClickSearch,
-                        onClickShare = onClickShare,
-                        onClickNotifications = onClickNotifications,
-                        openDrawer = {
-                            openDrawer()
-                        }
-                    )
+                    navController.navigate(route) {
+                        popUpTo = navController.graph.startDestinationId
+                        launchSingleTop = true
+                    }
                 }
+            )
+        },
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = DrawerScreens.Home.route
+        ) {
+            composable(DrawerScreens.Home.route) {
+                NotesScreen(
+                    onClickSearch = onClickSearch,
+                    onClickShare = onClickShare,
+                    onClickNotifications = onClickNotifications,
+                    openDrawer = {
+                        openDrawer()
+                    },
+                    notesListingItemState,
+                    onLongPressImage,
+                    onReleaseLongPressImage,
+                    onLongPressNote,
+                    onReleaseLongPressNote
+                )
             }
         }
-//    }
+    }
 }
 
 @Preview
@@ -65,6 +75,11 @@ fun HomeScreenPreview() {
     HomeScreenMain(
         onClickSearch = {},
         onClickShare = {},
-        onClickNotifications = {}
+        onClickNotifications = {},
+        notesListingItemState = NotesListingItemState(),
+        onLongPressImage = {},
+        onReleaseLongPressImage = {},
+        onLongPressNote = {},
+        onReleaseLongPressNote = {}
     )
 }
