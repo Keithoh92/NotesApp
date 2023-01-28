@@ -20,6 +20,18 @@ fun NoteItemNoteTextView(
         fontWeight = FontWeight.Normal,
         fontSize = 10.sp,
         maxLines = 4,
-        overflow = TextOverflow.Ellipsis
+        overflow = TextOverflow.Ellipsis,
+        modifier = Modifier
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onLongPress = {
+                        onLongPressNote(note)
+                    },
+                    onPress = {
+                        awaitRelease()
+                        onReleaseLongPressNote()
+                    }
+                )
+            }
     )
 }
