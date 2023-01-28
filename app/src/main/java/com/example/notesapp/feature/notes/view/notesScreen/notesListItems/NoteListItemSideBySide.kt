@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.notesapp.feature.notes.data.NoteInfo
 import com.example.notesapp.feature.notes.data.mockNoteInfo
-import com.example.notesapp.feature.notes.view.general.NoteItemNoteTextView
+import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.NoteItemNoteTextView
 import com.example.notesapp.feature.notes.view.general.NoteItemTitleTextView
 import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.GridViewGalleryTwoByTwo
 import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.NotesListItemCardView
