@@ -36,8 +36,9 @@ class NotesScreenViewModel @Inject constructor(): ViewModel() {
 
     }
 
-    fun onClickImagePreview(image: Int) {
+    fun onClickImagePreview(noteTitle: String, image: Int) {
         notesListingItemState = notesListingItemState.copy(
+            noteTitle = noteTitle,
             showNoteItemPreview = true,
             imageToShow = image
         )
@@ -49,8 +50,9 @@ class NotesScreenViewModel @Inject constructor(): ViewModel() {
         )
     }
 
-    fun onClickNotePreview(note: String) {
+    fun onClickNotePreview(noteTitle: String, note: String) {
         notesListingItemState = notesListingItemState.copy(
+            noteTitle = noteTitle,
             showNoteItemPreview = true,
             imageToShow = null,
             noteToShow = note

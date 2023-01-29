@@ -16,7 +16,7 @@ fun mockNotesList(): List<NoteInfo> {
 
     val categories = listOf("Personal", "Work", "Fun", "Misc")
 
-    val cardViewSelectedIds = listOf(1, 3, 4, 2, 3, 4)
+    val cardViewSelectedIds = listOf(1, 3, 4, 2, 5, 4)
 
     val notesInfoList = mutableListOf<NoteInfo>()
     for (i in 0..5) {

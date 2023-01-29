@@ -15,13 +15,13 @@ import com.example.notesapp.feature.notes.view.general.NoteItemTitleTextView
 import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.NotesListItemCardView
 import com.example.notesapp.ui.theme.NotesAppTheme
 import com.example.notesapp.ui.theme.full
-import com.example.notesapp.ui.theme.spacing8
+import com.example.notesapp.ui.theme.spacing16
 
 @Composable
 fun NotesListItemOne(
     noteInfo: NoteInfo,
     onClick: () -> Unit,
-    onLongPressNote: (String) -> Unit,
+    onLongPressNote: (String, String) -> Unit,
     onReleaseLongPressNote: () -> Unit
 ) {
     
@@ -29,13 +29,10 @@ fun NotesListItemOne(
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start,
-            modifier = Modifier
-                .padding(spacing8)
+            modifier = Modifier.padding(spacing16)
         ) {
             Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier
-                    .padding(spacing8)
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 NoteItemTitleTextView(title = noteInfo.title)
 
@@ -51,11 +48,10 @@ fun NotesListItemOne(
             }
 
             Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier
-                    .padding(spacing8)
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 NoteItemNoteTextView(
+                    title = noteInfo.title,
                     note = noteInfo.note,
                     onLongPressNote,
                     onReleaseLongPressNote
@@ -72,7 +68,7 @@ fun NotesListItemOnePreview() {
         NotesListItemOne(
             noteInfo = mockNoteInfo().first(),
             onClick = {},
-            {},
+            {_, _ ->},
             {}
         )
     }

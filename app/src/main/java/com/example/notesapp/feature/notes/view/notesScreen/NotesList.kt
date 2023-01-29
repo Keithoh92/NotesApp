@@ -26,9 +26,9 @@ import com.example.notesapp.ui.theme.spacing8
 fun NotesList(
     notesList: List<NoteInfo>,
     onNoteClicked: () -> Unit,
-    onLongPressImage: (Int) -> Unit,
+    onLongPressImage: (String, Int) -> Unit,
     onReleaseLongPress: () -> Unit,
-    onLongPressNote: (String) -> Unit,
+    onLongPressNote: (String, String) -> Unit,
     onReleaseLongPressNote: () -> Unit
 ) {
     LazyColumn(
@@ -60,6 +60,7 @@ fun NotesList(
                             NotesListItemOne(noteInfo = notesList[it], onClick = onNoteClicked, onLongPressNote, onReleaseLongPressNote)
                         }
                     }
+                    5 -> NotesListItemThree(noteInfo = notesList[it], {})
                 }
             }
         }
@@ -73,9 +74,9 @@ fun NotesListPreview() {
         NotesList(
             notesList = mockNotesList(),
             onNoteClicked = {},
-            onLongPressImage = {},
+            onLongPressImage = { _, _ ->},
             onReleaseLongPress = {},
-            onLongPressNote = {},
+            onLongPressNote = { _, _ -> },
             onReleaseLongPressNote = {}
         )
     }

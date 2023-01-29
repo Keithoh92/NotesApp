@@ -15,33 +15,33 @@ import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponen
 import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.NotesListItemCardView
 import com.example.notesapp.ui.theme.NotesAppTheme
 import com.example.notesapp.ui.theme.full
+import com.example.notesapp.ui.theme.spacing16
 import com.example.notesapp.ui.theme.spacing8
 
 @Composable
 fun NotesListItemSideBySide(
     noteInfo: NoteInfo,
     onClick: () -> Unit,
-    onLongPressImage: (Int) -> Unit,
+    onLongPressImage: (String, Int) -> Unit,
     onReleaseLongPress: () -> Unit,
-    onLongPressNote: (String) -> Unit,
+    onLongPressNote: (String, String) -> Unit,
     onReleaseLongPressNote: () -> Unit
 ) {
 
     NotesListItemCardView(onClick = onClick) {
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier
-                .padding(spacing8)
+            modifier = Modifier.padding(spacing16)
         ) {
 
             Column(
                 modifier = Modifier
-                    .padding(spacing8)
                     .weight(full)
             ) {
                 NoteItemTitleTextView(title = noteInfo.title)
 
                 NoteItemNoteTextView(
+                    title = noteInfo.title,
                     note = noteInfo.note,
                     onLongPressNote,
                     onReleaseLongPressNote
@@ -50,10 +50,10 @@ fun NotesListItemSideBySide(
 
             Column(
                 modifier = Modifier
-                    .padding(spacing8)
                     .weight(full)
             ) {
                 GridViewGalleryTwoByTwo(
+                    title = noteInfo.title,
                     images = noteInfo.noteImages ?: emptyList(),
                     onLongPressImage,
                     onReleaseLongPress
@@ -70,9 +70,9 @@ fun NotesListItemSideBySidePreview() {
         NotesListItemSideBySide(
             noteInfo = mockNoteInfo()[3],
             onClick = {},
+            { _, _ -> },
             {},
-            {},
-            {},
+            { _, _ ->},
             {}
         )
     }
