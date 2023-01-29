@@ -15,6 +15,7 @@ import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponen
 import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.VerticalGalleryLazyRow
 import com.example.notesapp.ui.theme.NotesAppTheme
 import com.example.notesapp.ui.theme.spacing10
+import com.example.notesapp.ui.theme.spacing16
 import com.example.notesapp.ui.theme.spacing8
 
 @Composable
@@ -27,9 +28,7 @@ fun NotesListItemThree(
          Column(
              verticalArrangement = Arrangement.spacedBy(spacing10),
              horizontalAlignment = Alignment.Start,
-             modifier = Modifier
-                 .padding(spacing8)
-                 .fillMaxWidth()
+             modifier = Modifier.padding(spacing16).fillMaxWidth()
          ) {
              NoteItemTitleTextView(title = noteInfo.title)
 

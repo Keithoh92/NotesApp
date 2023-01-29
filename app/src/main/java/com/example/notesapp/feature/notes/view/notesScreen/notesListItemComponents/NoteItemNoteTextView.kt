@@ -11,21 +11,22 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun NoteItemNoteTextView(
+    title: String,
     note: String,
-    onLongPressNote: (String) -> Unit,
+    onLongPressNote: (String, String) -> Unit,
     onReleaseLongPressNote: () -> Unit
 ) {
     Text(
         text = note,
         fontWeight = FontWeight.Normal,
-        fontSize = 10.sp,
+        fontSize = 12.sp,
         maxLines = 4,
         overflow = TextOverflow.Ellipsis,
         modifier = Modifier
             .pointerInput(Unit) {
                 detectTapGestures(
                     onLongPress = {
-                        onLongPressNote(note)
+                        onLongPressNote(title, note)
                     },
                     onPress = {
                         awaitRelease()

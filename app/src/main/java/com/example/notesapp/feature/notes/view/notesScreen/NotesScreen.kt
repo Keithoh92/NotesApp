@@ -1,4 +1,4 @@
-package com.example.notesapp.feature.notes.view
+package com.example.notesapp.feature.notes.view.notesScreen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
@@ -16,8 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.notesapp.R
 import com.example.notesapp.feature.notes.data.NotesListingItemState
 import com.example.notesapp.feature.notes.data.mockNotesList
-import com.example.notesapp.feature.notes.view.notesScreen.NotesList
-import com.example.notesapp.feature.notes.view.notesScreen.NotesScreenBottomAppBar
+import com.example.notesapp.feature.notes.view.TopAppBarHomeScreen
 import com.example.notesapp.feature.notes.view.notesScreen.notesListItemComponents.NoteItemPreviewer
 import com.example.notesapp.ui.theme.NotesAppTheme
 
@@ -28,9 +27,9 @@ fun NotesScreen(
     onClickNotifications: () -> Unit,
     openDrawer: () -> Unit,
     notesListingItemState: NotesListingItemState,
-    onLongPressImage: (Int) -> Unit,
+    onLongPressImage: (String, Int) -> Unit,
     onReleaseLongPressImage: () -> Unit,
-    onLongPressNote: (String) -> Unit,
+    onLongPressNote: (String, String) -> Unit,
     onReleaseLongPressNote: () -> Unit
 ) {
     
@@ -59,6 +58,7 @@ fun NotesScreen(
 
                     AnimatedVisibility(visible = notesListingItemState.showNoteItemPreview) {
                         NoteItemPreviewer(
+                            title = notesListingItemState.noteTitle,
                             image = notesListingItemState.imageToShow,
                             note = notesListingItemState.noteToShow
                         )
@@ -98,9 +98,9 @@ fun NotesScreenPreview() {
             onClickNotifications = {},
             openDrawer = {},
             notesListingItemState = NotesListingItemState(),
-            onLongPressImage = {},
+            onLongPressImage = { _, _ ->},
             onReleaseLongPressImage = {},
-            onLongPressNote = {},
+            onLongPressNote = { _, _ ->},
             onReleaseLongPressNote = {}
         )
     }

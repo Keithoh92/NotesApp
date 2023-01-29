@@ -41,9 +41,9 @@ fun MainActivityPreview() {
         onClickShare = {},
         onClickNotifications = {},
         notesListingItemState = NotesListingItemState(),
-        onLongPressImage = {},
+        onLongPressImage = { _, _ ->},
         onReleaseLongPressImage = {},
-        onLongPressNote = {},
+        onLongPressNote = { _, _ ->},
         onReleaseLongPressNote = {}
     )
 }

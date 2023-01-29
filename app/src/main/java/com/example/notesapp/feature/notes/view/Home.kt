@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.notesapp.feature.Drawer
 import com.example.notesapp.feature.DrawerScreens
 import com.example.notesapp.feature.notes.data.NotesListingItemState
+import com.example.notesapp.feature.notes.view.notesScreen.NotesScreen
 import kotlinx.coroutines.launch
 
 @Composable
@@ -18,9 +19,9 @@ fun HomeScreenMain(
     onClickShare: () -> Unit,
     onClickNotifications: () -> Unit,
     notesListingItemState: NotesListingItemState,
-    onLongPressImage: (Int) -> Unit,
+    onLongPressImage: (String, Int) -> Unit,
     onReleaseLongPressImage: () -> Unit,
-    onLongPressNote: (String) -> Unit,
+    onLongPressNote: (String, String) -> Unit,
     onReleaseLongPressNote: () -> Unit
 ) {
     val navController = rememberNavController()
@@ -77,9 +78,9 @@ fun HomeScreenPreview() {
         onClickShare = {},
         onClickNotifications = {},
         notesListingItemState = NotesListingItemState(),
-        onLongPressImage = {},
+        onLongPressImage = { _, _ ->},
         onReleaseLongPressImage = {},
-        onLongPressNote = {},
+        onLongPressNote = { _, _ ->},
         onReleaseLongPressNote = {}
     )
 }
