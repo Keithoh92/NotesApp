@@ -1,4 +1,4 @@
-package com.example.notesapp.feature.notes.view.notesScreen
+package com.example.notesapp.ui.notes.view.notesScreen
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
