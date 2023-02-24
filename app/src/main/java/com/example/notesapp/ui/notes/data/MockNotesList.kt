@@ -1,4 +1,4 @@
-package com.example.notesapp.feature.notes.data
+package com.example.notesapp.ui.notes.data
 
 import org.joda.time.DateTime
 

@@ -1,7 +1,7 @@
-package com.example.notesapp.feature.notes.data
+package com.example.notesapp.ui.notes.data
 
 import com.example.notesapp.R
-import org.joda.time.DateTime
+import java.util.*
 
 data class NotesListingState(
     val notes: List<NoteInfo> = mockNoteInfo()
@@ -22,8 +22,8 @@ fun mockNoteInfo() : List<NoteInfo> {
                 noteImages = listOfImages[i],
                 voiceNotes = emptyList(),
                 videoNotes = emptyList(),
-                date = DateTime.now().toDate(),
-                timestamp = DateTime.now().toDate(),
+                date = Date(1641052800000L),
+                timestamp = Date(1641052800000L),
                 cardViewSelectedId = 1
             )
         )
@@ -34,12 +34,25 @@ fun mockNoteInfo() : List<NoteInfo> {
 
 fun mockListOfImages(): List<Int> {
     return listOf(
-        R.drawable.image_02_12_2022_at_13_28,
-        R.drawable.image_06_12_2022_at_11_25,
-        R.drawable.image_06_12_2022_at_11_26,
-        R.drawable.image_09_12_2022_at_17_12,
-        R.drawable.image_13_12_2022_at_10_00,
-        R.drawable.image_13_12_2022_at_10_03
+        R.drawable.images_2,
+        R.drawable.images_3,
+        R.drawable.images_4,
+        R.drawable.istockphoto_1212174159_612x612,
+        R.drawable.photo_1533450718592_29d45635f0a9,
+        R.drawable.photo_1606115915090_be18fea23ec7,
+        R.drawable.woman_girl_freedom_happy_39853,
+        R.drawable.beach_resort_sunset_hd_wallpaper_background_jpg,
+        R.drawable._958474
+    )
+}
+
+fun mockNotesListState(): NotesListingItemState {
+    return NotesListingItemState(
+        showNoteItemPreview = false,
+        noteTitle = "Note 1",
+        imageToShow = null,
+        noteToShow = null,
+        notesMinimised = mutableMapOf<Int, Boolean>().apply { put(-1, false) }
     )
 }
 
