@@ -1,4 +1,4 @@
-package com.example.notesapp.feature.notes.view
+package com.example.notesapp.ui.notes.view.notesScreen.notesListItems
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -11,8 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.notesapp.feature.notes.data.NoteInfo
-import com.example.notesapp.feature.notes.data.mockNoteInfo
+import com.example.notesapp.ui.notes.data.NoteInfo
+import com.example.notesapp.ui.notes.data.mockNoteInfo
 import com.example.notesapp.ui.theme.*
 
 // The row view for each note will be controlled by the settings that the user chooses

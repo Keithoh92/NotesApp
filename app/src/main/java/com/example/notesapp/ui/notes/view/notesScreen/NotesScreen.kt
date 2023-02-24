@@ -1,5 +1,7 @@
-package com.example.notesapp.feature.notes.view
+package com.example.notesapp.ui.notes.view.notesScreen
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,16 +15,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.notesapp.R
-import com.example.notesapp.feature.notes.data.mockNotesList
-import com.example.notesapp.feature.notes.view.notesScreen.NotesList
-import com.example.notesapp.feature.notes.view.notesScreen.NotesScreenBottomAppBar
+import com.example.notesapp.ui.notes.data.NotesListingItemState
+import com.example.notesapp.ui.notes.data.mockNotesList
+import com.example.notesapp.ui.notes.view.TopAppBarHomeScreen
+import com.example.notesapp.ui.notes.view.notesScreen.notesListItemComponents.NoteItemPreviewer
+import com.example.notesapp.ui.event.BaseComposeEvent
 import com.example.notesapp.ui.theme.NotesAppTheme
 
 @Composable
 fun NotesScreen(
-    onClickSearch: () -> Unit,
-    onClickShare: () -> Unit,
-    onClickNotifications: () -> Unit,
+    notesListingItemState: NotesListingItemState,
+    onEvent: (BaseComposeEvent) -> Unit,
     openDrawer: () -> Unit
 ) {
     
@@ -39,15 +42,26 @@ fun NotesScreen(
                             bottom = it.calculateBottomPadding(),
                             top = it.calculateTopPadding()
                         )
+                        .background(MaterialTheme.colors.primaryVariant)
                 ) {
-                    NotesList(notesList = mockNotesList(), onNoteClicked = {})
+                    NotesList(
+                        notesList = mockNotesList(),
+                        notesListingItemState = notesListingItemState,
+                        onEvent = onEvent
+                    )
+
+                    AnimatedVisibility(visible = notesListingItemState.showNoteItemPreview) {
+                        NoteItemPreviewer(
+                            title = notesListingItemState.noteTitle,
+                            image = notesListingItemState.imageToShow,
+                            note = notesListingItemState.noteToShow
+                        )
+                    }
                 }            
             },
             bottomBar = {
                 NotesScreenBottomAppBar(
-                    onClickSearch = onClickSearch,
-                    onClickShare = onClickShare,
-                    onClickNotifications = onClickNotifications
+                    onEvent = onEvent
                 )
             },
             floatingActionButton = {
@@ -61,7 +75,8 @@ fun NotesScreen(
                 }
             },
             floatingActionButtonPosition = FabPosition.End,
-            isFloatingActionButtonDocked = true
+            isFloatingActionButtonDocked = true,
+            backgroundColor = MaterialTheme.colors.primaryVariant
         )
     }
 }
@@ -71,10 +86,9 @@ fun NotesScreen(
 fun NotesScreenPreview() {
     NotesAppTheme {
         NotesScreen(
-            onClickSearch = {},
-            onClickShare = {},
-            onClickNotifications = {},
-            openDrawer = {}
+            openDrawer = {},
+            notesListingItemState = NotesListingItemState(),
+            onEvent = {}
         )
     }
 }

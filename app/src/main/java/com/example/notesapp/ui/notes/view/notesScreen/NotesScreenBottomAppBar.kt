@@ -1,4 +1,4 @@
-package com.example.notesapp.feature.notes.view.notesScreen
+package com.example.notesapp.ui.notes.view.notesScreen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.shape.CircleShape
@@ -8,22 +8,20 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.notesapp.R
+import com.example.notesapp.ui.event.BaseComposeEvent
+import com.example.notesapp.ui.event.NotesAppEvent
 import com.example.notesapp.ui.theme.NotesAppTheme
 import com.example.notesapp.ui.theme.spacing10
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun NotesScreenBottomAppBar(
-    onClickSearch: () -> Unit,
-    onClickShare: () -> Unit,
-    onClickNotifications: () -> Unit
-) {
+    onEvent: (BaseComposeEvent) -> Unit
+    ) {
     BottomAppBar(
         elevation = spacing10,
-        backgroundColor = colorResource(id = R.color.dark_grey_app),
+        backgroundColor = MaterialTheme.colors.primary,
         cutoutShape = CircleShape
     ) {
         val listOfBottomAppBarItems = prepareBottomAppBarItems()
@@ -31,9 +29,9 @@ fun NotesScreenBottomAppBar(
         for (item in listOfBottomAppBarItems.indices) {
             IconButton(onClick = {
                 when (item) {
-                    0 -> onClickSearch()
-                    1 -> onClickShare()
-                    else -> onClickNotifications()
+                    0 -> onEvent(NotesAppEvent.OnClickSearch)
+                    1 -> onEvent(NotesAppEvent.OnClickShare)
+                    else -> onEvent(NotesAppEvent.OnClickNotifications)
                 }
             }) {
                 Icon(
@@ -65,10 +63,7 @@ fun prepareBottomAppBarItems(): List<BottomMenuItem> {
 fun BottomAppBarAllPreview() {
     NotesAppTheme {
         NotesScreenBottomAppBar(
-            onClickSearch = {},
-            onClickShare = {}
-        ) {
-
-        }
+            onEvent = {}
+        )
     }
 }
