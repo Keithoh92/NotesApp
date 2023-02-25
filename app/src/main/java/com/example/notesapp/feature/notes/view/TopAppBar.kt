@@ -6,6 +6,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,7 +32,12 @@ fun TopAppBarHomeScreen(
                 )
             }
         },
-        elevation = 10.dp
+        elevation = 10.dp,
+        actions = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Filled.MoreVert, contentDescription = null)
+            }
+        }
     )
 }
 
