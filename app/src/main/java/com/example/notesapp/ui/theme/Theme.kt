@@ -12,13 +12,13 @@ import com.example.notesapp.R
 fun NotesAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
 
     val darkColorPalette = darkColors(
-        primary = colorResource(id = R.color.dark_grey_app),
+        primary = colorResource(id = R.color.dark_purple_app),
         primaryVariant = colorResource(id = R.color.dark_grey_app),
         secondary = colorResource(id = R.color.light_grey_app)
     )
 
     val lightColorPalette = lightColors(
-        primary = colorResource(id = R.color.dark_grey_app),
+        primary = colorResource(id = R.color.dark_purple_app),
         primaryVariant = colorResource(id = R.color.dark_grey_app),
         secondary = colorResource(id = R.color.light_grey_app)
 

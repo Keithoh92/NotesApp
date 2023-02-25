@@ -6,9 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.notesapp.feature.notes.data.NotesListingItemState
-import com.example.notesapp.feature.notes.view.HomeScreenMain
-import com.example.notesapp.feature.notes.viewmodel.NotesScreenViewModel
+import com.example.notesapp.ui.notes.data.NotesListingItemState
+import com.example.notesapp.ui.notes.view.HomeScreenMain
+import com.example.notesapp.ui.notes.viewmodel.NotesScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,14 +20,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             HomeScreenMain(
-                onClickSearch = notesScreenViewModel::onClickSearch,
-                onClickShare = notesScreenViewModel::onClickShare,
-                onClickNotifications = notesScreenViewModel::onClickNotifications,
                 notesListingItemState = notesScreenViewModel.notesListingItemState,
-                onLongPressImage = notesScreenViewModel::onClickImagePreview,
-                onReleaseLongPressImage = notesScreenViewModel::onDismissImagePreview,
-                onLongPressNote = notesScreenViewModel::onClickNotePreview,
-                onReleaseLongPressNote = notesScreenViewModel::onDismissNotePreview
+                onEvent = notesScreenViewModel::onEvent
             )
         }
     }
@@ -37,13 +31,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainActivityPreview() {
     HomeScreenMain(
-        onClickSearch = {},
-        onClickShare = {},
-        onClickNotifications = {},
         notesListingItemState = NotesListingItemState(),
-        onLongPressImage = { _, _ ->},
-        onReleaseLongPressImage = {},
-        onLongPressNote = { _, _ ->},
-        onReleaseLongPressNote = {}
+        onEvent = {}
     )
 }
