@@ -16,12 +16,12 @@ class NotesRepository(
     private val noteMediaDao: NoteMediaDao
     ) : NoteRepo {
 
+    private val noteImagePaths = mutableListOf<String>()
+    private val noteVoicePaths = mutableListOf<String>()
+    private val noteVideoPaths = mutableListOf<String>()
+
     override suspend fun getAllNotes(): List<NoteInfo> {
         return noteDao.getAllNotes().map {
-            val noteImagePaths = mutableListOf<String>()
-            val noteVoicePaths = mutableListOf<String>()
-            val noteVideoPaths = mutableListOf<String>()
-
             getMediaForNote(it.id).forEach { noteMedia ->
                 when (noteMedia.mediaType) {
                     MediaType.IMAGE.ordinal -> noteImagePaths.add(noteMedia.path)
@@ -37,7 +37,18 @@ class NotesRepository(
         return@withContext noteMediaDao.getMedia(noteId)
     }
 
-    override suspend fun getNote(noteId: Int): NoteInfo = noteDao.getNote(noteId).toNoteInfo()
+    override suspend fun getNote(noteId: Int): NoteInfo  {
+        val note = noteDao.getNote(noteId)
+        getMediaForNote(note.id).forEach { noteMedia ->
+            when (noteMedia.mediaType) {
+                MediaType.IMAGE.ordinal -> noteImagePaths.add(noteMedia.path)
+                MediaType.VOICE.ordinal -> noteVoicePaths.add(noteMedia.path)
+                else -> noteVideoPaths.add(noteMedia.path)
+            }
+        }
+
+        return note.toNoteInfo(noteImagePaths, noteVoicePaths, noteVideoPaths)
+    }
 
     override suspend fun getMostRecentNote(): NoteInfo = noteDao.getMostRecentNote().toNoteInfo()
 

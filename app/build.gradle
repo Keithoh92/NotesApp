@@ -85,6 +85,7 @@ dependencies {
     testImplementation "android.arch.core:core-testing:1.1.1"
     testImplementation "io.mockk:mockk:1.13.4"
     testImplementation "org.jetbrains.kotlin:kotlin-test"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2"
 
     // Compose dependencies
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
