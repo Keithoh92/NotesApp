@@ -1,4 +1,4 @@
-package com.example.notesapp.ui.notes.data
+package com.example.notesapp.feature.note
 
 import java.util.Date
 
@@ -7,7 +7,7 @@ data class NoteInfo(
     val title: String,
     val note: String,
     val category: String?,
-    val noteImages: List<Int>?,
+    val noteImages: List<String>?,
     val voiceNotes: List<String>?,
     val videoNotes: List<String>?,
     val date: Date,

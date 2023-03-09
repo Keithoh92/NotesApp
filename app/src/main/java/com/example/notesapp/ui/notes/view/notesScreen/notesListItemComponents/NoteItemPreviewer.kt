@@ -1,7 +1,6 @@
 package com.example.notesapp.ui.notes.view.notesScreen.notesListItemComponents
 
 import android.annotation.SuppressLint
-import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,10 +14,10 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import coil.compose.rememberAsyncImagePainter
 import com.example.notesapp.ui.theme.spacing16
 import com.example.notesapp.ui.theme.spacing8
 
@@ -27,7 +26,7 @@ import com.example.notesapp.ui.theme.spacing8
 @Composable
 fun NoteItemPreviewer(
     title: String,
-    @StringRes image: Int?,
+    image: String?,
     note: String?
 ) {
     Dialog(
@@ -50,12 +49,14 @@ fun NoteItemPreviewer(
                 Divider(color = Color.Gray, thickness = 1.dp)
 
                 if (image != null) {
+                    val painter = rememberAsyncImagePainter(model = image)
                     Image(
-                        painter = painterResource(id = image),
+                        painter = painter,
                         contentDescription = null,
                         contentScale = ContentScale.Fit,
                         modifier = Modifier
-                            .padding(spacing8).align(Alignment.CenterHorizontally)
+                            .padding(spacing8)
+                            .align(Alignment.CenterHorizontally)
                     )
                 } else {
                     Text(

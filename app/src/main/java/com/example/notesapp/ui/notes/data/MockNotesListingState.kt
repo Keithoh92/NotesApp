@@ -1,6 +1,7 @@
 package com.example.notesapp.ui.notes.data
 
 import com.example.notesapp.R
+import com.example.notesapp.feature.note.NoteInfo
 import java.util.*
 
 data class NotesListingState(
@@ -19,7 +20,7 @@ fun mockNoteInfo() : List<NoteInfo> {
                 title = "Note $i",
                 note = loremEpsum,
                 category = "Personal",
-                noteImages = listOfImages[i],
+                noteImages = emptyList(),
                 voiceNotes = emptyList(),
                 videoNotes = emptyList(),
                 date = Date(1641052800000L),

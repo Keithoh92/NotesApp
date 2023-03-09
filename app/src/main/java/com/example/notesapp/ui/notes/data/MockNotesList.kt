@@ -1,5 +1,6 @@
 package com.example.notesapp.ui.notes.data
 
+import com.example.notesapp.feature.note.NoteInfo
 import org.joda.time.DateTime
 
 fun mockNotesList(): List<NoteInfo> {
@@ -26,7 +27,7 @@ fun mockNotesList(): List<NoteInfo> {
                 title = titles[i],
                 note = note,
                 category = null,
-                noteImages = if (i > 2) mockListOfImages() else null,
+                noteImages = null,
                 voiceNotes = null,
                 videoNotes = null,
                 date = DateTime.now().toDate(),

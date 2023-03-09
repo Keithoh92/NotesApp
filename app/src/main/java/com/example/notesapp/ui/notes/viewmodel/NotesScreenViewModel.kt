@@ -5,18 +5,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.notesapp.domain.NoteRepo
 import com.example.notesapp.ui.notes.data.NotesListingItemState
 import com.example.notesapp.ui.notes.data.NotesListingState
 import com.example.notesapp.ui.event.BaseComposeEvent
 import com.example.notesapp.ui.event.NotesAppEvent
+import com.example.notesapp.ui.notes.data.NotesScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotesScreenViewModel @Inject constructor(): ViewModel() {
+class NotesScreenViewModel @Inject constructor(
+    val notesRepository: NoteRepo
+): ViewModel() {
 
-    var notesListingState by mutableStateOf(NotesListingState())
+    var notesScreenState by mutableStateOf(NotesScreenState())
         private set
 
     var notesListingItemState by mutableStateOf(NotesListingItemState())
@@ -57,7 +61,7 @@ class NotesScreenViewModel @Inject constructor(): ViewModel() {
 
     }
 
-    private fun onClickImagePreview(noteTitle: String, image: Int) {
+    private fun onClickImagePreview(noteTitle: String, image: String) {
         notesListingItemState = notesListingItemState.copy(
             noteTitle = noteTitle,
             showNoteItemPreview = true,

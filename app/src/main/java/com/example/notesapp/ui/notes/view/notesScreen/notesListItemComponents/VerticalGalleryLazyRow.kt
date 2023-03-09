@@ -15,25 +15,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.notesapp.ui.notes.data.mockListOfImages
+import coil.compose.rememberAsyncImagePainter
 import com.example.notesapp.ui.theme.NotesAppTheme
 import com.example.notesapp.ui.theme.iconSize48
 import com.example.notesapp.ui.theme.spacing2
 
 @Composable
 fun VerticalGalleryLazyRow(
-    images: List<Int>
+    images: List<String>
 ) {
     LazyRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
         items(images.size) { item ->
+            val painter = rememberAsyncImagePainter(model = images[item])
             Image(
-                painter = painterResource(id = images[item]),
+                painter = painter,
                 contentDescription = null,
                 modifier = Modifier
                     .size(iconSize48)
@@ -51,7 +51,7 @@ fun VerticalGalleryLazyRow(
 fun VerticalGalleryLazyRowPreview() {
     NotesAppTheme {
         VerticalGalleryLazyRow(
-            images = mockListOfImages()
+            images = emptyList()
         )
     }
 }
