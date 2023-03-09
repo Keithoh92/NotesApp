@@ -1,10 +1,11 @@
 package com.example.notesapp.ui.notes.viewmodel
 
 import com.example.BaseTest
-import com.example.notesapp.R
+import com.example.notesapp.data.repository.NotesRepository
 import com.example.notesapp.ui.event.NotesAppEvent
 import com.example.notesapp.ui.notes.data.NotesListingItemState
 import io.mockk.every
+import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import kotlin.assert
@@ -15,12 +16,15 @@ class NotesScreenViewModelTest : BaseTest() {
 
     private val notesListingItemState = mockk<NotesListingItemState>(relaxed = true)
 
+    @RelaxedMockK
+    private lateinit var notesRepository: NotesRepository
+
     private lateinit var target: NotesScreenViewModel
 
     override fun setUp() {
         super.setUp()
 
-        target = NotesScreenViewModel()
+        target = NotesScreenViewModel(notesRepository)
     }
 
     @Test
@@ -49,9 +53,9 @@ class NotesScreenViewModelTest : BaseTest() {
 
         assertNotEquals("New Note", beforeUpdateStateNoteTitle)
         assert(!beforeUpdateStateNotePreview)
-        assertNotEquals(R.drawable.images_3, beforeUpdateStateImageToShow)
+        assertNotEquals("pathToImage", beforeUpdateStateImageToShow)
 
-        target.onEvent(NotesAppEvent.OnLongPressImage("New Note", R.drawable.images_3))
+        target.onEvent(NotesAppEvent.OnLongPressImage("New Note", "pathToImage"))
 
         val afterUpdateStateNoteTitle = target.notesListingItemState.noteTitle
         val afterUpdateStateNotePreview = target.notesListingItemState.showNoteItemPreview
@@ -59,13 +63,13 @@ class NotesScreenViewModelTest : BaseTest() {
 
         assertEquals("New Note", afterUpdateStateNoteTitle)
         assert(afterUpdateStateNotePreview)
-        assertEquals(R.drawable.images_3, afterUpdateStateImageToShow)
+        assertEquals("pathToImage", afterUpdateStateImageToShow)
     }
 
     @Test
     fun `onDismissImagePreview() - updates the notesListingItemState - showNoteItemPreview to false`() {
         // set state preview to true
-        target.onEvent(NotesAppEvent.OnLongPressImage("New Note", R.drawable.images_3))
+        target.onEvent(NotesAppEvent.OnLongPressImage("New Note", "pathToImage"))
 
         // before
         val beforeUpdateStateNotePreview = target.notesListingItemState.showNoteItemPreview
