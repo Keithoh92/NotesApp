@@ -11,7 +11,7 @@ sealed class NotesAppEvent : BaseComposeEvent {
 
     object OnClickNotifications : NotesAppEvent()
 
-    data class OnLongPressImage(val noteTitle: String, val image: Int) : NotesAppEvent()
+    data class OnLongPressImage(val noteTitle: String, val image: String) : NotesAppEvent()
 
     object OnReleaseLongPressImage : NotesAppEvent()
 

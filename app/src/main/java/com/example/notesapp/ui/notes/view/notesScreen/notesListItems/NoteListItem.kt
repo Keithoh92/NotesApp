@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.notesapp.ui.notes.data.NoteInfo
+import com.example.notesapp.feature.note.NoteInfo
 import com.example.notesapp.ui.notes.data.mockNoteInfo
 import com.example.notesapp.ui.theme.*
 
