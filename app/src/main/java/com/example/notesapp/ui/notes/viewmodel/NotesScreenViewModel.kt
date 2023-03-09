@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NotesScreenViewModel @Inject constructor(): ViewModel() {
 
-    var notesListingState by mutableStateOf(NotesListingState())
+    var notesScreenState by mutableStateOf(NotesScreenState())
         private set
 
     var notesListingItemState by mutableStateOf(NotesListingItemState())

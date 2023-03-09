@@ -1,17 +1,13 @@
-package com.example.notesapp.data
+package com.example.notesapp.feature.note
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import java.util.Date
 
-@Entity(tableName = "user_notes")
-data class NoteInfoDao(
-    @PrimaryKey(autoGenerate = true)
+data class NoteInfo(
     val id: Int,
     val title: String,
     val note: String,
     val category: String?,
-    val noteImages: List<Int>?,
+    val noteImages: List<String>?,
     val voiceNotes: List<String>?,
     val videoNotes: List<String>?,
     val date: Date,

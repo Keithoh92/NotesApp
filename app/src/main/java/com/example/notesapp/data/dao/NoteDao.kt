@@ -1,25 +1,25 @@
-package com.example.notesapp.data
+package com.example.notesapp.data.dao
 
 import androidx.room.*
-import com.example.notesapp.ui.notes.data.NoteInfo
+import com.example.notesapp.data.entity.Note
 
 @Dao
 interface NoteDao {
 
     @Query("SELECT * FROM user_notes ORDER BY timestamp DESC")
-    fun getAllNotes(): List<NoteInfoDao>
+    fun getAllNotes(): List<Note>
 
     @Query("SELECT * FROM user_notes WHERE id = :noteId")
-    fun getNote(noteId: Int): NoteInfoDao
+    fun getNote(noteId: Int): Note
 
     @Query("SELECT * FROM user_notes ORDER BY id DESC limit 1")
-    fun getMostRecentNote(): NoteInfoDao
+    fun getMostRecentNote(): Note
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(noteInfo: NoteInfo): Long
+    fun insert(noteInfo: Note): Long
 
     @Update
-    fun update(noteInfo: NoteInfo): Long
+    fun update(noteInfo: Note)
 
     @Query("DELETE FROM user_notes WHERE id = :noteId")
     fun delete(noteId: Int)

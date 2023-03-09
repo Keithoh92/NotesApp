@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.notesapp.ui.notes.data.NotesListingItemState
+import com.example.notesapp.ui.notes.data.NotesScreenState
 import com.example.notesapp.ui.notes.view.HomeScreenMain
 import com.example.notesapp.ui.notes.viewmodel.NotesScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             HomeScreenMain(
                 notesListingItemState = notesScreenViewModel.notesListingItemState,
+                notesScreenState = notesScreenViewModel.notesScreenState,
                 onEvent = notesScreenViewModel::onEvent
             )
         }
@@ -32,6 +34,7 @@ class MainActivity : ComponentActivity() {
 fun MainActivityPreview() {
     HomeScreenMain(
         notesListingItemState = NotesListingItemState(),
+        notesScreenState = NotesScreenState(),
         onEvent = {}
     )
 }

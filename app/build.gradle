@@ -127,4 +127,6 @@ dependencies {
     // Time joda
     implementation 'net.danlew:android.joda:2.12.1'
 
+    // Coil Image loader
+    implementation("io.coil-kt:coil-compose:2.2.2")
 }

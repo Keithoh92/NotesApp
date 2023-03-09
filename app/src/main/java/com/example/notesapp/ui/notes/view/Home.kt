@@ -12,11 +12,13 @@ import com.example.notesapp.feature.DrawerScreens
 import com.example.notesapp.ui.notes.data.NotesListingItemState
 import com.example.notesapp.ui.notes.view.notesScreen.NotesScreen
 import com.example.notesapp.ui.event.BaseComposeEvent
+import com.example.notesapp.ui.notes.data.NotesScreenState
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreenMain(
     notesListingItemState: NotesListingItemState,
+    notesScreenState: NotesScreenState,
     onEvent: (BaseComposeEvent) -> Unit
 ) {
     val navController = rememberNavController()
@@ -49,6 +51,7 @@ fun HomeScreenMain(
             composable(DrawerScreens.Home.route) {
                 NotesScreen(
                     notesListingItemState,
+                    notesScreenState,
                     onEvent,
                     openDrawer = {
                         openDrawer()
@@ -64,6 +67,7 @@ fun HomeScreenMain(
 fun HomeScreenPreview() {
     HomeScreenMain(
         notesListingItemState = NotesListingItemState(),
+        notesScreenState = NotesScreenState(),
         onEvent = {}
     )
 }

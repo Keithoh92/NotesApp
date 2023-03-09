@@ -16,15 +16,16 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.notesapp.R
 import com.example.notesapp.ui.notes.data.NotesListingItemState
-import com.example.notesapp.ui.notes.data.mockNotesList
 import com.example.notesapp.ui.notes.view.TopAppBarHomeScreen
 import com.example.notesapp.ui.notes.view.notesScreen.notesListItemComponents.NoteItemPreviewer
 import com.example.notesapp.ui.event.BaseComposeEvent
+import com.example.notesapp.ui.notes.data.NotesScreenState
 import com.example.notesapp.ui.theme.NotesAppTheme
 
 @Composable
 fun NotesScreen(
     notesListingItemState: NotesListingItemState,
+    notesScreenState: NotesScreenState,
     onEvent: (BaseComposeEvent) -> Unit,
     openDrawer: () -> Unit
 ) {
@@ -45,7 +46,7 @@ fun NotesScreen(
                         .background(MaterialTheme.colors.primaryVariant)
                 ) {
                     NotesList(
-                        notesList = mockNotesList(),
+                        notesList = notesScreenState.notes,
                         notesListingItemState = notesListingItemState,
                         onEvent = onEvent
                     )
@@ -88,6 +89,7 @@ fun NotesScreenPreview() {
         NotesScreen(
             openDrawer = {},
             notesListingItemState = NotesListingItemState(),
+            notesScreenState = NotesScreenState(),
             onEvent = {}
         )
     }

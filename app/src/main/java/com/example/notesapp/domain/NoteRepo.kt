@@ -1,6 +1,6 @@
-package com.example.notesapp.data
+package com.example.notesapp.domain
 
-import com.example.notesapp.ui.notes.data.NoteInfo
+import com.example.notesapp.feature.note.NoteInfo
 
 interface NoteRepo {
 
@@ -12,7 +12,7 @@ interface NoteRepo {
 
     suspend fun insert(noteInfo: NoteInfo): Long
 
-    suspend fun update(noteInfo: NoteInfo): Long
+    suspend fun update(noteInfo: NoteInfo)
 
     suspend fun delete(noteId: Int)
 }
