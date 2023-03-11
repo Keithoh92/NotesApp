@@ -6,10 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.notesapp.ui.notes.data.NotesListingItemState
-import com.example.notesapp.ui.notes.data.NotesScreenState
-import com.example.notesapp.ui.notes.view.HomeScreenMain
-import com.example.notesapp.ui.notes.viewmodel.NotesScreenViewModel
+import com.example.notesapp.ui.notesHomeScreen.state.NotesListingItemState
+import com.example.notesapp.ui.notesHomeScreen.state.NotesHomeScreenState
+import com.example.notesapp.ui.HomeScreenMain
+import com.example.notesapp.ui.noteScreen.state.NoteScreenState
+import com.example.notesapp.ui.noteScreen.viewModel.NoteScreenViewModel
+import com.example.notesapp.ui.notesHomeScreen.viewmodel.NotesHomeScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,13 +19,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val notesScreenViewModel: NotesScreenViewModel by viewModels()
+        val notesHomeScreenViewModel: NotesHomeScreenViewModel by viewModels()
+        val noteScreenViewModel: NoteScreenViewModel by viewModels()
 
         setContent {
             HomeScreenMain(
-                notesListingItemState = notesScreenViewModel.notesListingItemState,
-                notesScreenState = notesScreenViewModel.notesScreenState,
-                onEvent = notesScreenViewModel::onEvent
+                notesListingItemState = notesHomeScreenViewModel.notesListingItemState,
+                notesHomeScreenState = notesHomeScreenViewModel.notesHomeScreenState,
+                noteScreenState = noteScreenViewModel.noteScreenState,
+                onEvent = notesHomeScreenViewModel::onEvent
             )
         }
     }
@@ -34,7 +38,8 @@ class MainActivity : ComponentActivity() {
 fun MainActivityPreview() {
     HomeScreenMain(
         notesListingItemState = NotesListingItemState(),
-        notesScreenState = NotesScreenState(),
+        notesHomeScreenState = NotesHomeScreenState(),
+        noteScreenState = NoteScreenState(),
         onEvent = {}
     )
 }
