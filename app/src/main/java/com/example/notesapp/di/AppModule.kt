@@ -17,14 +17,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNoteApplication(): NotesApplication {
-        return NotesApplication()
-    }
-
-    @Provides
-    @Singleton
-    fun provideDatabase(application: NotesApplication): NotesDatabase {
-        return Room.databaseBuilder(application, NotesDatabase::class.java, "NOTESDB")
+    fun provideDatabase(): NotesDatabase {
+        return Room.databaseBuilder(NotesApplication.appContext, NotesDatabase::class.java, "NOTESDB")
             .fallbackToDestructiveMigration()
             .build()
     }
