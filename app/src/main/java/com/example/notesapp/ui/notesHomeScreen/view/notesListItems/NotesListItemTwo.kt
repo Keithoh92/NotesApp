@@ -32,7 +32,11 @@ fun NotesListItemTwo(
                 Spacer(modifier = Modifier.padding(start = spacing8))
                 
                 if (noteInfo.noteImages?.isNotEmpty() == true) {
-                    VerticalGalleryLazyRow(images = noteInfo.noteImages)
+                    VerticalGalleryLazyRow(
+                        title = noteInfo.title,
+                        images = noteInfo.noteImages,
+                        onEvent = onEvent
+                    )
                 }
             }
 

@@ -36,15 +36,22 @@ fun NotesList(
             .padding(spacing8)
     ) {
         items(notesList.size) {
-            Column(modifier = Modifier.fillMaxSize().padding(bottom = spacing8)) {
+            Column(modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = spacing8)) {
                 val noteCardViewId = notesList[it]
+
                 when (noteCardViewId.cardViewSelectedId) {
                     1 -> NotesListItemOne(noteInfo = notesList[it], isMinimised = notesListingItemState.notesMinimised, onEvent, onClick = {})
                     2 -> NotesListItemTwo(noteInfo = notesList[it], onEvent)
                     3 -> {
                         // TODO - Will be fixed cleaned and refactored in future iterations
                         if (notesList[it].note.isNotEmpty()) NotesListItemOne(noteInfo = notesList[it], isMinimised = notesListingItemState.notesMinimised, onEvent, onClick = {})
-                        else NotesListItemThree(noteInfo = notesList[it], onClick = {})
+                        else NotesListItemThree(
+                            noteInfo = notesList[it],
+                            {},
+                            onEvent = onEvent
+                        )
                     }
                     4 -> {
                         if (notesList[it].noteImages?.isNotEmpty() == true) {
@@ -57,7 +64,11 @@ fun NotesList(
                             NotesListItemOne(noteInfo = notesList[it], isMinimised = notesListingItemState.notesMinimised, onEvent, onClick = {})
                         }
                     }
-                    5 -> NotesListItemThree(noteInfo = notesList[it], {})
+                    5 -> NotesListItemThree(
+                        noteInfo = notesList[it],
+                        {},
+                        onEvent = onEvent
+                    )
                 }
             }
         }

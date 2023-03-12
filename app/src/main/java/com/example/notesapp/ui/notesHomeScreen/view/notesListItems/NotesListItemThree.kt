@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.notesapp.feature.note.NoteInfo
+import com.example.notesapp.ui.event.BaseComposeEvent
 import com.example.notesapp.ui.mockData.mockNoteInfo
 import com.example.notesapp.ui.notesHomeScreen.view.notesListItemComponents.NoteItemTitleTextView
 import com.example.notesapp.ui.notesHomeScreen.view.notesListItemComponents.NotesListItemCardView
@@ -20,7 +21,8 @@ import com.example.notesapp.ui.theme.spacing16
 @Composable
 fun NotesListItemThree(
     noteInfo: NoteInfo,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onEvent: (BaseComposeEvent) -> Unit
 ) {
 
     NotesListItemCardView(onClick) {
@@ -32,7 +34,11 @@ fun NotesListItemThree(
              NoteItemTitleTextView(title = noteInfo.title)
 
              if (noteInfo.noteImages?.isNotEmpty() == true) {
-                 VerticalGalleryLazyRow(images = noteInfo.noteImages)
+                 VerticalGalleryLazyRow(
+                     title = noteInfo.title,
+                     images = noteInfo.noteImages,
+                     onEvent = onEvent
+                 )
              }
          }
     }
@@ -44,7 +50,8 @@ fun NotesListItemThreePreview() {
     NotesAppTheme {
         NotesListItemThree(
             noteInfo = mockNoteInfo()[3],
-            onClick = {}
+            onClick = {},
+            onEvent = {}
         )
     }
 }

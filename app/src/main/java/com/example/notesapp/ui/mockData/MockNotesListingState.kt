@@ -34,20 +34,6 @@ fun mockNoteInfo() : List<NoteInfo> {
     return noteInfoList
 }
 
-fun mockListOfImages(): List<Int> {
-    return listOf(
-        R.drawable.images_2,
-        R.drawable.images_3,
-        R.drawable.images_4,
-        R.drawable.istockphoto_1212174159_612x612,
-        R.drawable.photo_1533450718592_29d45635f0a9,
-        R.drawable.photo_1606115915090_be18fea23ec7,
-        R.drawable.woman_girl_freedom_happy_39853,
-        R.drawable.beach_resort_sunset_hd_wallpaper_background_jpg,
-        R.drawable._958474
-    )
-}
-
 fun mockNotesListState(): NotesListingItemState {
     return NotesListingItemState(
         showNoteItemPreview = false,
