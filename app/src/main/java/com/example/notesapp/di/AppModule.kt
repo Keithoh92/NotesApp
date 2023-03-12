@@ -1,5 +1,6 @@
 package com.example.notesapp.di
 
+import android.content.Context
 import androidx.room.Room
 import com.example.notesapp.NotesApplication
 import com.example.notesapp.data.NotesDatabase
@@ -14,6 +15,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context {
+        return NotesApplication.appContext
+    }
 
     @Provides
     @Singleton

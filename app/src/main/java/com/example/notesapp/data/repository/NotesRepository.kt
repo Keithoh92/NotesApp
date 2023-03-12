@@ -20,8 +20,8 @@ class NotesRepository(
     private val noteVoicePaths = mutableListOf<String>()
     private val noteVideoPaths = mutableListOf<String>()
 
-    override suspend fun getAllNotes(): List<NoteInfo> {
-        return noteDao.getAllNotes().map {
+    override suspend fun getAllNotes(): List<NoteInfo> = withContext(Dispatchers.IO) {
+        return@withContext noteDao.getAllNotes().map {
             getMediaForNote(it.id).forEach { noteMedia ->
                 when (noteMedia.mediaType) {
                     MediaType.IMAGE.ordinal -> noteImagePaths.add(noteMedia.path)
@@ -52,7 +52,9 @@ class NotesRepository(
 
     override suspend fun getMostRecentNote(): NoteInfo = noteDao.getMostRecentNote().toNoteInfo()
 
-    override suspend fun insert(noteInfo: NoteInfo): Long {
+    override suspend fun insert(noteInfo: NoteInfo): Long = withContext(Dispatchers.IO) {
+        val insertResult = noteDao.insert(noteInfo.toNote())
+
         mutableListOf<String>().apply {
             noteInfo.noteImages?.let { this.addAll(it) }
             noteInfo.voiceNotes?.let { this.addAll(it) }
@@ -67,7 +69,7 @@ class NotesRepository(
             insertNoteMedia(noteMedia)
         }
 
-        return noteDao.insert(noteInfo.toNote())
+        return@withContext insertResult
     }
 
     private fun insertNoteMedia(noteMedia: NoteMedia) = noteMediaDao.insert(noteMedia)
