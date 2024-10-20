@@ -1,7 +1,7 @@
 package com.example.notesapp.mocks
 
-import com.example.notesapp.data.entity.Note
-import com.example.notesapp.data.entity.NoteMedia
+import com.example.notesapp.data.database.entity.Note
+import com.example.notesapp.data.database.entity.NoteMedia
 import com.example.notesapp.domain.enum.MediaType
 import java.util.Date
 
@@ -16,7 +16,6 @@ object MockNoteData {
                     title = "Note $i",
                     note = "Test note $i",
                     category = null,
-                    date = Date(),
                     timestamp = Date(),
                     cardViewSelectedId = i
                 )

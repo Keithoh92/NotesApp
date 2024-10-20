@@ -32,7 +32,6 @@ fun mockNotesList(): List<NoteInfo> {
                 noteImages = null,
                 voiceNotes = null,
                 videoNotes = null,
-                date = DateTime.now().toDate(),
                 timestamp = DateTime.now().toDate(),
                 cardViewSelectedId = cardViewSelectedIds[i]
             )
@@ -50,7 +49,6 @@ data class MockNoteInfo(
     val noteImages: List<Int>?,
     val voiceNotes: List<Int>?,
     val videoNotes: List<Int>?,
-    val date: Date,
     val timestamp: Date,
     val cardViewSelectedId: Int
 )
@@ -64,7 +62,6 @@ fun mockNoteForDisplayPurposes(): NoteInfo {
         noteImages = null,
         voiceNotes = null,
         videoNotes = null,
-        date = DateTime.now().toDate(),
         timestamp = DateTime.now().toDate(),
         cardViewSelectedId = 1
     )

@@ -24,7 +24,6 @@ fun mockNoteInfo() : List<NoteInfo> {
                 noteImages = emptyList(),
                 voiceNotes = emptyList(),
                 videoNotes = emptyList(),
-                date = Date(1641052800000L),
                 timestamp = Date(1641052800000L),
                 cardViewSelectedId = 1
             )

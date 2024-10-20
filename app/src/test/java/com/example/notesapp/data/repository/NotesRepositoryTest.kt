@@ -1,10 +1,11 @@
 package com.example.notesapp.data.repository
 
 import com.example.BaseTest
-import com.example.notesapp.data.dao.NoteDao
-import com.example.notesapp.data.dao.NoteMediaDao
-import com.example.notesapp.data.entity.NoteMedia
-import com.example.notesapp.domain.NoteRepo
+import com.example.notesapp.data.database.dao.NoteDao
+import com.example.notesapp.data.database.dao.NoteMediaDao
+import com.example.notesapp.data.database.entity.NoteMedia
+import com.example.notesapp.data.database.repository.NotesRepository
+import com.example.notesapp.domain.database.NoteRepo
 import com.example.notesapp.domain.enum.MediaType
 import com.example.notesapp.feature.note.NoteInfo
 import com.example.notesapp.mocks.MockNoteData
@@ -32,7 +33,6 @@ class NotesRepositoryTest : BaseTest() {
         note = "Test Note insert",
         title = "Testing Insert",
         category = null,
-        date = Date(),
         timestamp = Date(),
         noteImages = listOf("pathToImage1", "pathToImage2"),
         voiceNotes = null,
@@ -45,7 +45,6 @@ class NotesRepositoryTest : BaseTest() {
         note = "Test Note insert update",
         title = "Testing Insert update",
         category = null,
-        date = Date(),
         timestamp = Date(),
         noteImages = listOf("pathToImage1", "pathToImage2"),
         voiceNotes = null,

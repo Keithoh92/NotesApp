@@ -1,4 +1,4 @@
-package com.example.notesapp.data.entity
+package com.example.notesapp.data.database.entity
 
 import androidx.room.Entity
 import androidx.room.ForeignKey

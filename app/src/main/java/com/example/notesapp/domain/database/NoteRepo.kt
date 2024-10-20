@@ -1,4 +1,4 @@
-package com.example.notesapp.domain
+package com.example.notesapp.domain.database
 
 import com.example.notesapp.feature.note.NoteInfo
 
@@ -15,4 +15,6 @@ interface NoteRepo {
     suspend fun update(noteInfo: NoteInfo)
 
     suspend fun delete(noteId: Int)
+
+    suspend fun deleteWelcomeNote()
 }

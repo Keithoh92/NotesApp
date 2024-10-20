@@ -1,14 +1,19 @@
 package com.example.notesapp.ui.notesHomeScreen.viewmodel
 
+import android.content.Context
 import com.example.BaseTest
-import com.example.notesapp.domain.NoteRepo
+import com.example.notesapp.domain.database.NoteRepo
 import com.example.notesapp.ui.notesHomeScreen.event.NotesHomeScreenEvent
 import com.example.notesapp.ui.notesHomeScreen.state.NotesListingItemState
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.Test
-import kotlin.assert
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
@@ -21,10 +26,21 @@ class NotesScreenViewModelTest : BaseTest() {
     @RelaxedMockK
     private lateinit var noteRepo: NoteRepo
 
+    @RelaxedMockK
+    private lateinit var context: Context
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun setUp() {
         super.setUp()
+        Dispatchers.setMain(UnconfinedTestDispatcher())
 
-        target = NotesHomeScreenViewModel(noteRepo)
+        target = NotesHomeScreenViewModel(noteRepo, context)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun tearDown() {
+        super.tearDown()
+        Dispatchers.resetMain()
     }
 
     @Test

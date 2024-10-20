@@ -20,6 +20,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.example.notesapp.R
+import com.example.notesapp.common.logs.NLog
 import com.example.notesapp.ui.event.BaseComposeEvent
 import com.example.notesapp.ui.notesHomeScreen.event.NotesHomeScreenEvent
 import com.example.notesapp.ui.theme.NotesAppTheme
@@ -36,8 +38,11 @@ fun VerticalGalleryLazyRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
-        items(images.size) { item ->
-            val painter = rememberAsyncImagePainter(model = images[item])
+        val imagesToShow = images.ifEmpty { getPlaceHolderDrawables() }
+
+        items(imagesToShow.size) { item ->
+            NLog.d("image -> ${imagesToShow[item]}")
+            val painter = rememberAsyncImagePainter(model = imagesToShow[item])
             Image(
                 painter = painter,
                 contentDescription = null,
@@ -48,7 +53,7 @@ fun VerticalGalleryLazyRow(
                     .pointerInput(Unit) {
                         detectTapGestures(
                             onLongPress = {
-                                onEvent(NotesHomeScreenEvent.OnLongPressImage(title, images[item]))
+                                onEvent(NotesHomeScreenEvent.OnLongPressImage(title, painter))
                             },
                             onPress = {
                                 awaitRelease()
@@ -61,6 +66,18 @@ fun VerticalGalleryLazyRow(
             Spacer(modifier = Modifier.padding(horizontal = spacing2))
         }
     }
+}
+
+fun getPlaceHolderDrawables() : List<Int> {
+    return listOf(
+        R.drawable.images_2,
+        R.drawable.beach_resort_sunset_hd_wallpaper_background_jpg,
+        R.drawable.images_3,
+        R.drawable.images_4,
+        R.drawable._958474,
+        R.drawable.istockphoto_1212174159_612x612,
+        R.drawable.photo_1533450718592_29d45635f0a9,
+    )
 }
 
 @Preview(showBackground = true)

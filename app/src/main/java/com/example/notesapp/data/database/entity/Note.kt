@@ -1,6 +1,5 @@
-package com.example.notesapp.data.entity
+package com.example.notesapp.data.database.entity
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
@@ -12,8 +11,6 @@ data class Note(
     val title: String,
     val note: String,
     val category: String?,
-    @ColumnInfo(name = "date")
-    val date: Date,
     val timestamp: Date,
     val cardViewSelectedId: Int
 )

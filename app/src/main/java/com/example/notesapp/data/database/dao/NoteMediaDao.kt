@@ -1,10 +1,10 @@
-package com.example.notesapp.data.dao
+package com.example.notesapp.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.notesapp.data.entity.NoteMedia
+import com.example.notesapp.data.database.entity.NoteMedia
 
 @Dao
 interface NoteMediaDao {

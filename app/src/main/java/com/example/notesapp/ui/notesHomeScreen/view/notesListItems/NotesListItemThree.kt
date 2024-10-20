@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.notesapp.feature.note.NoteInfo
 import com.example.notesapp.ui.event.BaseComposeEvent
 import com.example.notesapp.ui.mockData.mockNoteInfo
@@ -22,10 +24,20 @@ import com.example.notesapp.ui.theme.spacing16
 fun NotesListItemThree(
     noteInfo: NoteInfo,
     onClick: () -> Unit,
-    onEvent: (BaseComposeEvent) -> Unit
+    isRevealedCardSwipe: Map<Int, Boolean>,
+    onEvent: (BaseComposeEvent) -> Unit,
+    navController: NavController
 ) {
 
-    NotesListItemCardView(onClick) {
+    val revealed = isRevealedCardSwipe[noteInfo.id] ?: false
+
+    NotesListItemCardView(
+        onClick = { navController.navigate("Note/?noteId=${noteInfo.id}") },
+        noteId = noteInfo.id,
+        isRevealed = revealed,
+        cardOffset = CARD_OFFSET,
+        onEvent = onEvent
+    ) {
          Column(
              verticalArrangement = Arrangement.spacedBy(spacing10),
              horizontalAlignment = Alignment.Start,
@@ -36,7 +48,7 @@ fun NotesListItemThree(
              if (noteInfo.noteImages?.isNotEmpty() == true) {
                  VerticalGalleryLazyRow(
                      title = noteInfo.title,
-                     images = noteInfo.noteImages,
+                     images = noteInfo.noteImages ?: emptyList(),
                      onEvent = onEvent
                  )
              }
@@ -47,11 +59,14 @@ fun NotesListItemThree(
 @Preview(showBackground = true)
 @Composable
 fun NotesListItemThreePreview() {
+    val navController = rememberNavController()
     NotesAppTheme {
         NotesListItemThree(
             noteInfo = mockNoteInfo()[3],
             onClick = {},
-            onEvent = {}
+            isRevealedCardSwipe = mapOf(),
+            onEvent = {},
+            navController = navController
         )
     }
 }

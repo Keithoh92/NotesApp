@@ -10,7 +10,6 @@ data class NoteInfo(
     val noteImages: List<String>?,
     val voiceNotes: List<String>?,
     val videoNotes: List<String>?,
-    val date: Date,
     val timestamp: Date,
     val cardViewSelectedId: Int
 )

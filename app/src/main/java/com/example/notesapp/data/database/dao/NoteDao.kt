@@ -1,7 +1,7 @@
-package com.example.notesapp.data.dao
+package com.example.notesapp.data.database.dao
 
 import androidx.room.*
-import com.example.notesapp.data.entity.Note
+import com.example.notesapp.data.database.entity.Note
 
 @Dao
 interface NoteDao {
@@ -23,4 +23,7 @@ interface NoteDao {
 
     @Query("DELETE FROM user_notes WHERE id = :noteId")
     fun delete(noteId: Int)
+
+    @Query("DELETE FROM user_notes WHERE id = 1")
+    fun deleteWelcomeNote()
 }

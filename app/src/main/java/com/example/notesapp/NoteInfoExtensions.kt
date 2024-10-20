@@ -1,6 +1,6 @@
 package com.example.notesapp
 
-import com.example.notesapp.data.entity.Note
+import com.example.notesapp.data.database.entity.Note
 import com.example.notesapp.feature.note.NoteInfo
 
 fun Note.toNoteInfo(
@@ -16,7 +16,6 @@ fun Note.toNoteInfo(
         noteImages = noteImagePath,
         voiceNotes = noteVoicePath,
         videoNotes = noteVideoPath,
-        date = this.date,
         timestamp = this.timestamp,
         cardViewSelectedId = this.cardViewSelectedId
     )
@@ -28,7 +27,6 @@ fun NoteInfo.toNote(): Note {
         title = this.title,
         note = this.note,
         category = this.category,
-        date = this.date,
         timestamp = this.timestamp,
         cardViewSelectedId = this.cardViewSelectedId
     )

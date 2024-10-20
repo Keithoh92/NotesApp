@@ -1,17 +1,17 @@
-package com.example.notesapp.data
+package com.example.notesapp.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.notesapp.data.dao.NoteDao
-import com.example.notesapp.data.dao.NoteMediaDao
-import com.example.notesapp.data.entity.DateConverter
-import com.example.notesapp.data.entity.Note
-import com.example.notesapp.data.entity.NoteMedia
+import com.example.notesapp.data.database.dao.NoteDao
+import com.example.notesapp.data.database.dao.NoteMediaDao
+import com.example.notesapp.data.database.entity.DateConverter
+import com.example.notesapp.data.database.entity.Note
+import com.example.notesapp.data.database.entity.NoteMedia
 
-@Database(entities = [Note::class, NoteMedia::class], version = 1, exportSchema = false)
+@Database(entities = [Note::class, NoteMedia::class], version = 5, exportSchema = false)
 @TypeConverters(DateConverter::class)
 abstract class NotesDatabase: RoomDatabase() {
 

@@ -60,7 +60,7 @@ fun GridViewGalleryTwoByTwo(
                         .pointerInput(Unit) {
                             detectTapGestures(
                                 onLongPress = {
-                                    onEvent(NotesHomeScreenEvent.OnLongPressImage(title, images[item]))
+                                    onEvent(NotesHomeScreenEvent.OnLongPressImage(title, painter    ))
                                 },
                                 onPress = {
                                     awaitRelease()

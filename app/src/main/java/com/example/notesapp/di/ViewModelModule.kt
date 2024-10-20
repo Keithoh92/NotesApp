@@ -1,9 +1,11 @@
 package com.example.notesapp.di
 
-import com.example.notesapp.data.dao.NoteDao
-import com.example.notesapp.data.dao.NoteMediaDao
-import com.example.notesapp.data.repository.NotesRepository
-import com.example.notesapp.domain.NoteRepo
+import android.content.Context
+import com.example.notesapp.data.database.dao.NoteDao
+import com.example.notesapp.data.database.dao.NoteMediaDao
+import com.example.notesapp.data.database.repository.NotesRepository
+import com.example.notesapp.domain.StringResHelper
+import com.example.notesapp.domain.database.NoteRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,5 +20,11 @@ object ViewModelModule {
     @ViewModelScoped
     fun provideNotesRepository(noteDao: NoteDao, noteMediaDao: NoteMediaDao): NoteRepo {
         return NotesRepository(noteDao, noteMediaDao)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideStringResHelper(context: Context): StringResHelper {
+        return StringResHelper(context)
     }
 }

@@ -3,9 +3,9 @@ package com.example.notesapp.di
 import android.content.Context
 import androidx.room.Room
 import com.example.notesapp.NotesApplication
-import com.example.notesapp.data.NotesDatabase
-import com.example.notesapp.data.dao.NoteDao
-import com.example.notesapp.data.dao.NoteMediaDao
+import com.example.notesapp.data.database.NotesDatabase
+import com.example.notesapp.data.database.dao.NoteDao
+import com.example.notesapp.data.database.dao.NoteMediaDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -14,6 +14,7 @@ import com.example.notesapp.ui.notesHomeScreen.view.notesListItemComponents.Grid
 import com.example.notesapp.ui.notesHomeScreen.view.notesListItemComponents.NotesListItemCardView
 import com.example.notesapp.ui.event.BaseComposeEvent
 import com.example.notesapp.ui.mockData.mockNoteInfo
+import com.example.notesapp.ui.notesHomeScreen.event.NotesHomeScreenEvent
 import com.example.notesapp.ui.theme.NotesAppTheme
 import com.example.notesapp.ui.theme.full
 import com.example.notesapp.ui.theme.spacing16
@@ -22,10 +23,18 @@ import com.example.notesapp.ui.theme.spacing16
 fun NotesListItemSideBySide(
     noteInfo: NoteInfo,
     onClick: () -> Unit,
+    isRevealedCardSwipe: Map<Int, Boolean>,
     onEvent: (BaseComposeEvent) -> Unit
 ) {
+    val revealed = isRevealedCardSwipe[noteInfo.id] ?: false
 
-    NotesListItemCardView(onClick = onClick) {
+    NotesListItemCardView(
+        onClick = { onEvent(NotesHomeScreenEvent.OnNoteClicked(noteId = noteInfo.id)) },
+        noteId = noteInfo.id,
+        isRevealed = revealed,
+        cardOffset = CARD_OFFSET,
+        onEvent = onEvent
+    ) {
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.padding(spacing16)
@@ -65,6 +74,7 @@ fun NotesListItemSideBySidePreview() {
         NotesListItemSideBySide(
             noteInfo = mockNoteInfo()[3],
             onClick = {},
+            isRevealedCardSwipe = mapOf(),
             onEvent = {}
         )
     }
